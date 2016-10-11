@@ -1,0 +1,38 @@
+
+
+```{r}
+
+library(circular)
+library(chron)
+library(lubridate)
+library(dygraphs)
+library(ggplot2)
+```
+
+
+```{r}
+data1<-read.csv("time_dist.csv", sep=";", header=TRUE)
+head(data1)
+data2<-read.csv("phone_codes.csv", sep=";", header = T )
+head(data2)
+
+```
+
+Convrt the column to date class
+
+```{r}
+data1$time<-as.POSIXlt(data1$time,format="%H:%M")
+data1$time<-times(format(data1$time,"%H:%M:%S"))
+
+class(data1$TimeName)
+```
+
+```{r}
+# make our data into circular class from package circular
+eventdata$eventhour <- circular(hour_of_event%%24, # convert to 24 hrs
+                                units="hours", template="clock24")
+# plot a rose diagram, setting prop(ortion) argument after trial-n-error
+rose.diag(eventdata$eventhour, bin = 24, col = "lightblue", main = "Events by Hour (sqrt scale)", 
+          prop = 3)
+
+```
